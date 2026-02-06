@@ -11,7 +11,7 @@ namespace Core {
 
 		std::string game_title = "SFML - Pong!";
 
-		RenderWindow* game_Window;
+		RenderWindow* game_window;
 
 		void createGameWindow();
 
