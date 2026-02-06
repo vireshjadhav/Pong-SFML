@@ -6,7 +6,7 @@ namespace Core
 	void GameWindowManager::initialize()
 	{
 		//Allocate memory fot the render window object
-		game_Window = new RenderWindow();
+		game_window = new RenderWindow();
 
 		//Set up the window with configured properties
 		createGameWindow();
@@ -15,23 +15,30 @@ namespace Core
 	void GameWindowManager::createGameWindow()
 	{
 		//Create the window with specific dimensions and title
-		game_Window->create(VideoMode(game_window_width, game_window_height), game_title);
+		game_window->create(
+			sf::VideoMode::getDesktopMode(),
+			game_title,
+			sf::Style::Fullscreen
+			);
 	}
 
 	bool GameWindowManager::isGameRunning()
 	{
 		//Return true if window is open, false if closed
-		return game_Window->isOpen();
+		return game_window->isOpen();
 	}
 
 	void GameWindowManager::render()
 	{
-		// This will handle all the drawing operations
-		//It'll be used in future lessons
+		//Clear window with orange color(R:200, G:50, B:50, A:255)
+		game_window->clear(sf::Color(200, 50, 50, 255));
+
+		//Display the Changes
+		game_window->display();
 	}
 
 	RenderWindow* GameWindowManager::getGameWindow()
 	{
-		return game_Window;
+		return game_window;
 	}
 }
