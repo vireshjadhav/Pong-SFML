@@ -1,25 +1,23 @@
-//GameWindowManage.cpp
-#include "../../Header/Core/GameWindowManager.h"
+//GameWindowManager.cpp
+#include <../../Header/Core/GameWindowManager.h>
 
-namespace Core
-{
+using namespace sf;
+
+namespace Core {
+
 	void GameWindowManager::initialize()
 	{
 		//Allocate memory fot the render window object
 		game_window = new RenderWindow();
 
 		//Set up the window with configured properties
-		createGameWindow();
+		creatGameWindow();
 	}
 
-	void GameWindowManager::createGameWindow()
+	void GameWindowManager::creatGameWindow()
 	{
 		//Create the window with specific dimensions and title
-		game_window->create(
-			sf::VideoMode::getDesktopMode(),
-			game_title,
-			sf::Style::Fullscreen
-			);
+		game_window->create(VideoMode(game_window_width, game_window_height), game_title, sf::Style::Default);
 	}
 
 	bool GameWindowManager::isGameRunning()
@@ -31,9 +29,9 @@ namespace Core
 	void GameWindowManager::render()
 	{
 		//Clear window with orange color(R:200, G:50, B:50, A:255)
-		game_window->clear(sf::Color(200, 50, 50, 255));
+		game_window->clear(Color(200, 50, 50, 255));
 
-		//Display the Changes
+		//Display Changes
 		game_window->display();
 	}
 
