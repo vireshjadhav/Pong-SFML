@@ -1,10 +1,12 @@
+//GameWindowManager.h
 #pragma once
 #include <SFML/Graphics.hpp>
 
-using namespace sf;
-
 namespace Core {
-	class GameWindowManager {
+	using namespace sf;
+
+	class GameWindowManager
+	{
 	private:
 		int game_window_width = 1280;
 		int game_window_height = 720;
@@ -13,7 +15,8 @@ namespace Core {
 
 		RenderWindow* game_window;
 
-		void createGameWindow();
+		void creatGameWindow();
+
 
 	public:
 		void initialize();
@@ -21,5 +24,4 @@ namespace Core {
 		bool isGameRunning();
 		void render();
 	};
-
 }
