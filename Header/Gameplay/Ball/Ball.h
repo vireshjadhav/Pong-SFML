@@ -14,10 +14,6 @@ namespace Gameplay
 
 		const string texture_path = "Assets/Textures/Ball.png";
 
-		CircleShape ball_sprite;
-
-		const float radius = 10.0f;
-
 		const float scale_x = 0.06f;
 		const float scale_y = 0.06f;
 
