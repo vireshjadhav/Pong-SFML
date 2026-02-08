@@ -14,6 +14,7 @@ namespace Gameplay
 		ball = new Ball();
 		player1 = new Paddle(player1_position_x, player1_position_y);
 		player2 = new Paddle(player2_position_x, player2_position_y);
+		boundary = new Boundary();
 	}
 
 	void GameplayManager::render(RenderWindow* game_window)
@@ -21,6 +22,7 @@ namespace Gameplay
 		ball->render(game_window);
 		player1->render(game_window);
 		player2->render(game_window);
+		boundary->render(game_window);
 	}
 
 	void GameplayManager::update()
