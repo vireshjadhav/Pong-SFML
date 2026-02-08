@@ -25,9 +25,24 @@ namespace Gameplay
 		paddle_sprite.setRotation(90);
 	}
 
-	void Paddle::update()
+	void Paddle::movePaddle(bool move_up_key_pressed, bool move_down_key_pressed)
 	{
+		//move up
+		if (move_up_key_pressed)
+		{
+			paddle_sprite.move(0, -paddleSpeed);
+		}
 
+		//move down
+		if (move_down_key_pressed)
+		{
+			paddle_sprite.move(0, paddleSpeed);
+		}
+	}
+
+	void Paddle::update(bool move_up_key_pressed, bool move_down_key_pressed)
+	{
+		movePaddle(move_up_key_pressed, move_down_key_pressed);
 	}
 
 	void Paddle::render(RenderWindow* game_window)
