@@ -7,14 +7,7 @@ namespace Gameplay
 {
 	class Boundary {
 	private:
-		//Horizontal
-		RectangleShape topBoundary;
-		RectangleShape bottomBoundary;
 
-		//vertical
-		RectangleShape leftBoundary;
-		RectangleShape rightBoundary;
-		RectangleShape centerLine;
 
 		//Horizontal boundary dimensions (toop and bottom)
 		const float horizontal_boundary_width = 1280.0f;
@@ -60,6 +53,15 @@ namespace Gameplay
 		void createCenterLine();
 
 	public:
+		//Horizontal
+		RectangleShape topBoundary;
+		RectangleShape bottomBoundary;
+
+		//vertical
+		RectangleShape leftBoundary;
+		RectangleShape rightBoundary;
+		RectangleShape centerLine;
+
 		Boundary();
 		void update();
 		void render(RenderWindow* game_window);
