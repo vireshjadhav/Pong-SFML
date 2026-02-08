@@ -1,8 +1,6 @@
 //GameWindowManager.cpp
 #include <../../Header/Core/GameWindowManager.h>
 
-using namespace sf;
-
 namespace Core {
 
 	void GameWindowManager::initialize()
