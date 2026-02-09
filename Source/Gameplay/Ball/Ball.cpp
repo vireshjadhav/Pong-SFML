@@ -57,27 +57,12 @@ namespace Gameplay
 		}
 	}
 
-	void Ball::handleOutofBoundCollision()
-	{
-		FloatRect ball_bounds = pong_ball_sprite.getGlobalBounds();
-
-		if (ball_bounds.left <= left_Boundary)
-		{
-			reset();
-		}
-
-		if (ball_bounds.left + ball_bounds.width >= right_Boundary)
-		{
-			reset();
-		}
-	}
-
 	void Ball::reset()
 	{
 		pong_ball_sprite.setPosition(center_position_x, center_position_y);
 		velocity = Vector2f(ball_speed, ball_speed);
 		elapse_delay_time = 0.0f;
-		current_state == BallState::Idle;
+		current_state = BallState::Idle;
 	}
 
 	void Ball::move(TimeService* time_service)
@@ -102,6 +87,43 @@ namespace Gameplay
 			{
 				return;
 			}
+		}
+	}
+
+	bool Ball::isLeftCollisionOccurred()
+	{
+		return had_left_collision;
+	}
+
+	void Ball::updateLeftCollisionState(bool value)
+	{
+		had_left_collision = value;
+	}
+
+	bool Ball::isRightCollisionOccurred()
+	{
+		return had_right_collision;
+	}
+
+	void Ball::updateRightCollisionState(bool value)
+	{
+		had_right_collision = value;
+	}
+
+	void Ball::handleOutofBoundCollision()
+	{
+		FloatRect ball_bounds = pong_ball_sprite.getGlobalBounds();
+
+		//Chek for out-of-bounds on the left or right boundary
+		if (ball_bounds.left <= left_Boundary)
+		{
+			updateLeftCollisionState(true);
+			reset();
+		}
+		else if (ball_bounds.left + ball_bounds.width >= right_Boundary)
+		{
+			updateRightCollisionState(true);
+			reset();
 		}
 	}
 

@@ -23,7 +23,7 @@ namespace Gameplay
 		const float position_x = 615.0f;
 		const float position_y = 335.0f;
 
-		const float ball_speed = 20.0f;
+		const float ball_speed = 50.0f;
 
 		// Horizontal Boundaries
 		const float top_boundary = 20.0f;
@@ -40,11 +40,14 @@ namespace Gameplay
 		int speed_multiplier = 10;
 
 		float elapse_delay_time = 0.0f;
-		float delay_duration = 2.0f;
+		float delay_duration = 3.0f;
 
 		BallState current_state;
 
 		Vector2f velocity = Vector2f(ball_speed, ball_speed);
+
+		bool had_left_collision = false;
+		bool had_right_collision = false;
 
 		void loadTexture();
 		void initializeVariables();
@@ -52,12 +55,17 @@ namespace Gameplay
 
 		void updateDelayTime(float delta_time);
 
+
 	public:
 		Ball();
 		void handlePaddleCollision(Paddle* player1, Paddle* player2);
 		void handleBoundaryCollision();
 		void handleOutofBoundCollision();
 		void onCollision(Paddle* player1, Paddle* player2);
+		bool isLeftCollisionOccurred();
+		void updateLeftCollisionState(bool value);
+		bool isRightCollisionOccurred();
+		void updateRightCollisionState(bool value);
 		void reset();
 		void update(Paddle* player1, Paddle* player2, TimeService* time_service);
 		void render(RenderWindow* game_window);
