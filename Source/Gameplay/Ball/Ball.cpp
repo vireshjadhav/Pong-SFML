@@ -5,6 +5,7 @@ namespace Gameplay
 {
 	Ball::Ball()
 	{
+		current_state = BallState::Idle;
 		loadTexture();
 		initializeVariables();
 	}
@@ -75,16 +76,38 @@ namespace Gameplay
 	{
 		pong_ball_sprite.setPosition(center_position_x, center_position_y);
 		velocity = Vector2f(ball_speed, ball_speed);
+		elapse_delay_time = 0.0f;
+		current_state == BallState::Idle;
 	}
 
-	void Ball::move()
+	void Ball::move(TimeService* time_service)
 	{
-		pong_ball_sprite.move(velocity);
+		updateDelayTime(time_service->getDeltaTime());
+		if (current_state == BallState::Moving)
+		{
+			pong_ball_sprite.move(velocity * time_service->getDeltaTime() * static_cast<float>(speed_multiplier));
+		}
 	}
 
-	void Ball::update(Paddle* player1, Paddle* player2)
+	void Ball::updateDelayTime(float delta_time)
 	{
-		move();
+		if (current_state == BallState::Idle)
+		{
+			elapse_delay_time += delta_time;
+			if (elapse_delay_time >= delay_duration)
+			{
+				current_state = BallState::Moving;
+			}
+			else
+			{
+				return;
+			}
+		}
+	}
+
+	void Ball::update(Paddle* player1, Paddle* player2, TimeService* time_service)
+	{
+		move(time_service);
 		onCollision(player1, player2);
 	}
 

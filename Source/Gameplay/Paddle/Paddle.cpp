@@ -36,12 +36,12 @@ namespace Gameplay
 		return paddle_sprite;
 	}
 
-	void Paddle::movePaddle(bool move_up_key_pressed, bool move_down_key_pressed)
+	void Paddle::movePaddle(bool move_up_key_pressed, bool move_down_key_pressed, TimeService* time_service)
 	{
 		//move up
 		if (move_up_key_pressed && paddle_sprite.getPosition().y > topBoundary)
 		{
-			paddle_sprite.move(0, -paddleSpeed);
+			paddle_sprite.move(0, -paddleSpeed * time_service->getDeltaTime() * speedMultiplier);
 		}
 
 		FloatRect paddle_Bounds = paddle_sprite.getGlobalBounds();
@@ -49,13 +49,13 @@ namespace Gameplay
 		//move down
 		if (move_down_key_pressed && paddle_sprite.getPosition().y + paddle_Bounds.height < bottomBoundary)
 		{
-			paddle_sprite.move(0, paddleSpeed);
+			paddle_sprite.move(0, paddleSpeed * time_service->getDeltaTime() * speedMultiplier);
 		}
 	}
 
-	void Paddle::update(bool move_up_key_pressed, bool move_down_key_pressed)
+	void Paddle::update(bool move_up_key_pressed, bool move_down_key_pressed, TimeService* time_service)
 	{
-		movePaddle(move_up_key_pressed, move_down_key_pressed);
+		movePaddle(move_up_key_pressed, move_down_key_pressed,time_service);
 	}
 
 	void Paddle::render(RenderWindow* game_window)
