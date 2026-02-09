@@ -8,6 +8,8 @@ using namespace sf;
 using namespace std;
 namespace Gameplay
 {
+	enum class BallState { Idle, Moving };
+
 	class Ball {
 	private:
 		Texture pong_ball_texture;
@@ -21,7 +23,7 @@ namespace Gameplay
 		const float position_x = 615.0f;
 		const float position_y = 335.0f;
 
-		const float ball_speed = 0.1f;
+		const float ball_speed = 20.0f;
 
 		// Horizontal Boundaries
 		const float top_boundary = 20.0f;
@@ -35,10 +37,20 @@ namespace Gameplay
 		const float center_position_x = 615.0f;
 		const float center_position_y = 325.0f;
 
+		int speed_multiplier = 10;
+
+		float elapse_delay_time = 0.0f;
+		float delay_duration = 2.0f;
+
+		BallState current_state;
+
 		Vector2f velocity = Vector2f(ball_speed, ball_speed);
 
 		void loadTexture();
 		void initializeVariables();
+		void move(TimeService* time_service);
+
+		void updateDelayTime(float delta_time);
 
 	public:
 		Ball();
@@ -47,8 +59,7 @@ namespace Gameplay
 		void handleOutofBoundCollision();
 		void onCollision(Paddle* player1, Paddle* player2);
 		void reset();
-		void move();
-		void update(Paddle* player1, Paddle* player2);
+		void update(Paddle* player1, Paddle* player2, TimeService* time_service);
 		void render(RenderWindow* game_window);
 	};
 }
