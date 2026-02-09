@@ -8,6 +8,7 @@ namespace Gameplay
 		time_service = new TimeService();
 		time_service->initialize(); // Start our time tracking
 		event_manager = manager;
+		ui_service = new UIService();
 		initialize();
 	}
 
@@ -19,14 +20,6 @@ namespace Gameplay
 		boundary = new Boundary();
 	}
 
-	void GameplayManager::render(RenderWindow* game_window)
-	{
-		ball->render(game_window);
-		player1->render(game_window);
-		player2->render(game_window);
-		boundary->render(game_window);
-	}
-
 	void GameplayManager::update()
 	{
 		time_service->update();
@@ -34,5 +27,14 @@ namespace Gameplay
 
 		player1->update(event_manager->isKeyPressed(Keyboard::W), event_manager->isKeyPressed(Keyboard::S), time_service);
 		player2->update(event_manager->isKeyPressed(Keyboard::Up), event_manager->isKeyPressed(Keyboard::Down), time_service);
+	}
+
+	void GameplayManager::render(RenderWindow* game_window)
+	{
+		boundary->render(game_window);
+		ball->render(game_window);
+		player1->render(game_window);
+		player2->render(game_window);
+		ui_service->render(game_window);
 	}
 }

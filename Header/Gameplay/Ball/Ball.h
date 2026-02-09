@@ -40,7 +40,7 @@ namespace Gameplay
 		int speed_multiplier = 10;
 
 		float elapse_delay_time = 0.0f;
-		float delay_duration = 2.0f;
+		float delay_duration = 3.0f;
 
 		BallState current_state;
 
