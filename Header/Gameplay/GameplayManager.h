@@ -37,6 +37,10 @@ namespace Gameplay
 
 		UIService* ui_service;
 
+		void UpdateScore();
+
+		void resetPlayer();
+
 	public:
 		GameplayManager(EventManager* event_manager);
 		void update();

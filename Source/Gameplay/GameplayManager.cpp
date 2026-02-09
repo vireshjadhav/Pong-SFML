@@ -20,6 +20,31 @@ namespace Gameplay
 		boundary = new Boundary();
 	}
 
+	void GameplayManager::UpdateScore()
+	{
+		//Left side out - player 2 scores!
+		if (ball->isLeftCollisionOccurred())
+		{
+			ui_service->incrementPlayer2Score();
+			ball->updateLeftCollisionState(false);
+			resetPlayer();
+		}
+
+		//Right side out - player 1 scores!
+		if (ball->isRightCollisionOccurred())
+		{
+			ui_service->incrementPlayer1Score();
+			ball->updateRightCollisionState(false);
+			resetPlayer();
+		}
+	}
+
+	void GameplayManager::resetPlayer()
+	{
+		player1->reset(player1_position_x, player1_position_y);
+		player2->reset(player2_position_x, player2_position_y);
+	}
+
 	void GameplayManager::update()
 	{
 		time_service->update();
@@ -27,6 +52,9 @@ namespace Gameplay
 
 		player1->update(event_manager->isKeyPressed(Keyboard::W), event_manager->isKeyPressed(Keyboard::S), time_service);
 		player2->update(event_manager->isKeyPressed(Keyboard::Up), event_manager->isKeyPressed(Keyboard::Down), time_service);
+
+		UpdateScore();
+		ui_service->update();
 	}
 
 	void GameplayManager::render(RenderWindow* game_window)
