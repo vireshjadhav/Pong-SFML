@@ -9,6 +9,7 @@ using namespace sf;
 using namespace Core;
 using namespace Event;
 using namespace Gameplay;
+using namespace Sound;
 
 namespace Core {
 	class GameLoop 
